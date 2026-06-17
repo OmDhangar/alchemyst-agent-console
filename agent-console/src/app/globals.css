@@ -1,0 +1,113 @@
+/**
+ * globals.css — Global styles and animations for the Agent Console
+ *
+ * This file sets up the dark theme base, animations used across components,
+ * and browser-level defaults (scrollbar, selection, focus). All component-
+ * specific styles live in their respective .tsx files as inline style objects.
+ */
+
+/* ── Import Inter from Google Fonts ──────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ── Reset ────────────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #e2e8f0;
+  background: #0f172a;
+}
+
+/* ── Cursor blink animation (used on streaming text cursor) ──────────────── */
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ── Spinner animation (reconnection banner, loading states) ─────────────── */
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Custom scrollbar (dark theme) ───────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* ── Focus styles ─────────────────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* ── Smooth scroll ────────────────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Selection color ──────────────────────────────────────────────────────── */
+
+::selection {
+  background-color: rgba(99, 102, 241, 0.3);
+  color: #f1f5f9;
+}
+
+/* ── Textarea focus state (for chat input) ────────────────────────────────── */
+
+textarea:focus {
+  border-color: #6366f1 !important;
+}
+
+/* ── Button hover states ──────────────────────────────────────────────────── */
+
+button:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
