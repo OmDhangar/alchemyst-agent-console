@@ -45,7 +45,4 @@ next-env.d.ts
 # Vercel
 .vercel
 
-# Local documentation artifacts
-IMPLEMENTATION_PLAN.md
-development_log.md
-walkthrough.md
+

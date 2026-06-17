@@ -58,7 +58,7 @@ DISCONNECTED ──(connect)──► CONNECTING ──(WS open)──► CONNEC
 
 A walk-through of the application handling Chaos Mode connections, out-of-order sequence resolution, duplicate filters, and hot reconnection states.
 
-- 📺 **[Watch the Project Submission Video](./Project%20submission.mp4)** (included locally in this repository)
+- 📺 **[Watch the Project Submission Video](./agent-console/Project%20submission.mp4)** (included locally in this repository)
 
 ## Running Locally
 
@@ -102,37 +102,38 @@ npm start
 ## Project Structure
 
 ```
-src/
-├── app/
-│   ├── globals.css          # Dark theme, animations, scrollbar
-│   ├── layout.tsx           # Root layout with metadata
-│   └── page.tsx             # Entry point — initializes WebSocket
-├── components/
-│   ├── ChatPanel/
-│   │   ├── ChatPanel.tsx    # Message list + input
-│   │   ├── MessageBubble.tsx # User/agent message rendering
-│   │   └── ToolCallCard.tsx # Tool call card with args/result
-│   ├── TimelinePanel/
-│   │   └── TimelinePanel.tsx # Virtualized event trace
-│   ├── ContextPanel/
-│   │   └── ContextPanel.tsx # JSON tree with diff + scrubber
-│   ├── ConsoleShell.tsx     # 3-panel layout shell
-│   └── ui/
-│       └── ReconnectBanner.tsx # Non-blocking reconnect indicator
-├── hooks/
-│   └── useWebSocket.ts     # Wires wsManager ↔ store ↔ processor
-└── lib/
-    ├── protocol/
-    │   ├── stateMachine.ts  # Pure state transition function
-    │   ├── wsManager.ts     # WebSocket lifecycle + reconnection
-    │   ├── messageProcessor.ts # Seq-ordered processing pipeline
-    │   └── heartbeat.ts     # PING/PONG heartbeat manager
-    ├── streams/
-    │   ├── types.ts         # All protocol types
-    │   ├── streamState.ts   # Zustand store
-    │   └── messageBuffer.ts # SeqBuffer (sorted array + binary search)
-    └── utils/
-        └── jsonDiff.ts      # RFC 6902 JSON Patch diffing
+agent-console/
+├── src/
+│   ├── app/
+│   │   ├── globals.css          # Dark theme, animations, scrollbar
+│   │   ├── layout.tsx           # Root layout with metadata
+│   │   └── page.tsx             # Entry point — initializes WebSocket
+│   ├── components/
+│   │   ├── ChatPanel/
+│   │   │   ├── ChatPanel.tsx    # Message list + input
+│   │   │   ├── MessageBubble.tsx # User/agent message rendering
+│   │   │   └── ToolCallCard.tsx # Tool call card with args/result
+│   │   ├── TimelinePanel/
+│   │   │   └── TimelinePanel.tsx # Virtualized event trace
+│   │   ├── ContextPanel/
+│   │   │   └── ContextPanel.tsx # JSON tree with diff + scrubber
+│   │   ├── ConsoleShell.tsx     # 3-panel layout shell
+│   │   └── ui/
+│   │       └── ReconnectBanner.tsx # Non-blocking reconnect indicator
+│   ├── hooks/
+│   │   └── useWebSocket.ts     # Wires wsManager ↔ store ↔ processor
+│   └── lib/
+│       ├── protocol/
+│       │   ├── stateMachine.ts  # Pure state transition function
+│       │   ├── wsManager.ts     # WebSocket lifecycle + reconnection
+│       │   ├── messageProcessor.ts # Seq-ordered processing pipeline
+│       │   └── heartbeat.ts     # PING/PONG heartbeat manager
+│       ├── streams/
+│       │   ├── types.ts         # All protocol types
+│       │   ├── streamState.ts   # Zustand store
+│       │   └── messageBuffer.ts # SeqBuffer (sorted array + binary search)
+│       └── utils/
+│           └── jsonDiff.ts      # RFC 6902 JSON Patch diffing
 ```
 
 ## Key Techniques
@@ -157,7 +158,7 @@ A key protocol detail is that the server resets its sequence counter back to `0`
 
 ## Design Decisions
 
-See [DECISIONS.md](./DECISIONS.md) for detailed rationale on:
+See [DECISIONS.md](./agent-console/DECISIONS.md) for detailed rationale on:
 1. Why sorted array over heap for sequence ordering
 2. How we prevent layout shift on tool call cards
 3. Why `lastProcessedSeq` instead of `lastReceivedSeq` for RESUME
